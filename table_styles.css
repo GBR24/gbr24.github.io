@@ -1,4 +1,16 @@
 /* Global Styles */
+
+header {
+    background-color: #282c34;
+    color: white;
+    padding: 20px 0;
+    text-align: left;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
 body {
     background-color: #002b55; /* Dark blue background */
     font-family: Arial, sans-serif;
