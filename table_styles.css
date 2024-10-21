@@ -11,6 +11,30 @@ header {
     z-index: 100;
 }
 
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: left;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+header nav ul li a:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
 body {
     background-color: #002b55; /* Dark blue background */
     font-family: Arial, sans-serif;
