@@ -195,3 +195,69 @@ footer p {
     background-color: #45a049;
 }
 
+/* Global Styles */
+body {
+    background-color: #002b55; /* Dark blue background */
+    font-family: Arial, sans-serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Table Styles */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #1f1f1f;
+    color: #ddd;
+    border: 1px solid #444;
+}
+
+th, td {
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+th {
+    background-color: #0d3b66;
+    color: #fff;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #2a2a2a; /* Striped effect */
+}
+
+tr:hover {
+    background-color: #445e76; /* Hover effect */
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #0d3b66;
+    color: #fff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+a {
+    color: #1ebdc2;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
