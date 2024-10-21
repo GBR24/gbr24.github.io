@@ -57,6 +57,8 @@ table {
     background-color: #1f1f1f;
     color: #ddd;
     border: 1px solid #444;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 th, td {
