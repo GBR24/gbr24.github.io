@@ -14,39 +14,41 @@ body {
 }
 
 header {
-    background-color: #282c34;
-    color: white;
-    padding: 20px 0;
-    text-align: left;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
 }
 
-header nav ul {
+header img {
+    height: 50px; /* Adjust as needed */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+nav ul {
     list-style: none;
     display: flex;
-    justify-content: left;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
 }
 
-header nav ul li {
-    margin: 0 15px;
-}
-
-header nav ul li a {
-    color: white;
+nav ul li a {
     text-decoration: none;
-    font-weight: 500;
-    padding: 10px 20px;
-    transition: background-color 0.3s ease;
-    border-radius: 5px;
+    font-size: 16px;
+    color: #007bff;
 }
 
-header nav ul li a:hover {
-    background-color: #4CAF50;
-    color: white;
+nav ul li a:hover {
+    text-decoration: underline;
 }
+
 
 #hero {
     background: linear-gradient(to right, #4CAF50, #2f3640);
