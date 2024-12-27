@@ -52,12 +52,16 @@ nav ul li a:hover {
 
 
 #hero {
-    background: linear-gradient(to right, #4CAF50, #2f3640);
-    color: white;
-    text-align: center;
-    padding: 100px 20px 80px;
-    min-height: 60vh;
+    background-image: url("assets/images/hero-bg.jpg"); /* Path to your image */
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    padding: 60px 20px; /* Adjust padding for spacing */
+    text-align: center; /* Centers the text */
+    color: white; /* Ensures text is readable */
+    font-family: 'Roboto', sans-serif; /* Matches your font style */
 }
+
 
 #hero h2 {
     font-size: 48px;
