@@ -11,10 +11,15 @@
         document.getElementById("contactLink").addEventListener("click", function () {
             window.location.href = "contact.html";
         });
-    });
-</script>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
+        // Our Services Link Navigation
+        document.getElementById("servicesLink").addEventListener("click", function (event) {
+            event.preventDefault();
+            window.location.href = "services.html";
+        });
+    });
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -48,19 +53,20 @@
         </article>
     </section>
 
+    <!-- Newsletter Subscription Section -->
+    <section id="subscribe">
+        <h3>Subscribe to Our Newsletter</h3>
+        <p>Stay updated with the latest insights in quantitative finance, algorithms, and risk management.</p>
+        <!-- Example Embed Code for Newsletter Subscription -->
+        <form action="https://your-newsletter-service.com/subscribe" method="POST">
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
     <footer>
         <p>© 2024 Quantitative Finance Insights</p>
     </footer>
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Select the "Our Services" link by its ID
-        document.getElementById("servicesLink").addEventListener("click", function (event) {
-            // Prevent the default action of the link (i.e., href="#")
-            event.preventDefault();
-            // Navigate to the services.html page
-            window.location.href = "services.html";
-        });
-    });
-</script>
 </body>
 </html>
+
