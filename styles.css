@@ -195,5 +195,30 @@ footer p {
     background-color: #45a049;
 }
 
-
-
+/* Newsletter Form Styles */
+#subscribe {
+    text-align: center;
+    margin: 50px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+#subscribe input {
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#subscribe button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#subscribe button:hover {
+    background-color: #0056b3;
+}
