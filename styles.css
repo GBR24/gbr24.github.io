@@ -52,7 +52,7 @@ nav ul li a:hover {
 
 
 #hero {
-    background-image: url("assets/images/hero-bg.jpg"); /* Path to your image */
+    background-image: url("cal.png"); /* Path to your image */
     background-size: cover; /* Ensures the image covers the entire section */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents the image from repeating */
