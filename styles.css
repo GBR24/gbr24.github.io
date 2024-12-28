@@ -58,7 +58,7 @@ nav ul li a:hover {
     background-repeat: no-repeat; /* Prevents the image from repeating */
     padding: 60px 20px; /* Adjust padding for spacing */
     text-align: center; /* Centers the text */
-    color: white; /* Ensures text is readable */
+    color: grey; /* Ensures text is readable */
     font-family: 'Roboto', sans-serif; /* Matches your font style */
 }
 
