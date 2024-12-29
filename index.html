@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quantitative Finance</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- Particles.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script> <!-- D3.js for graphs -->
     <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("contactLink").addEventListener("click", function () {
@@ -45,9 +47,12 @@
     </header>
 
     <div class="container">
-        <section id="hero">
+        <!-- Hero Section with Particle Background -->
+        <section id="hero" style="position: relative; overflow: hidden;">
+            <div id="particles-js"></div>
             <h2>Your Gateway to Financial Models</h2>
             <p>Explore in-depth articles on financial modeling, algorithmic trading, and quantitative risk management.</p>
+            <div id="graph"></div>
         </section>
 
         <section id="articles">
@@ -67,7 +72,6 @@
         <!-- Newsletter Subscription Section -->
         <section id="subscribe">
             <h3>Subscribe to Our Weekly Forecasts</h3>
-            <!--<p>Stay updated with the latest insights in quantitative finance, algorithms, and risk management.</p>-->
             <iframe src="https://embeds.beehiiv.com/e6790eb9-776e-4506-b903-5b876dea24a7" 
                     data-test-id="beehiiv-embed" 
                     width="100%" 
@@ -95,5 +99,61 @@
             <p>© 2024 Calibria</p>
         </div>
     </footer>
+
+    <!-- Particles.js Configuration -->
+    <script>
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#ffffff" },
+            "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" } },
+            "opacity": { "value": 0.5 },
+            "size": { "value": 3, "random": true },
+            "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
+            "move": { "enable": true, "speed": 3 }
+        },
+        "interactivity": {
+            "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } },
+            "modes": { "grab": { "distance": 200, "line_linked": { "opacity": 1 } } }
+        },
+        "retina_detect": true
+    });
+    </script>
+
+    <!-- D3.js Line Graph Animation -->
+    <script>
+    const svg = d3.select("#graph")
+        .append("svg")
+        .attr("width", "100%")
+        .attr("height", 200);
+
+    const data = Array.from({ length: 50 }, () => Math.random() * 100);
+
+    const x = d3.scaleLinear().domain([0, data.length - 1]).range([0, window.innerWidth]);
+    const y = d3.scaleLinear().domain([0, 100]).range([200, 0]);
+
+    const line = d3.line()
+        .x((_, i) => x(i))
+        .y(d => y(d))
+        .curve(d3.curveBasis);
+
+    const path = svg.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 2)
+        .attr("d", line);
+
+    function animateLine() {
+        data.push(Math.random() * 100);
+        data.shift();
+
+        path.datum(data).attr("d", line);
+
+        requestAnimationFrame(animateLine);
+    }
+
+    animateLine();
+    </script>
 </body>
 </html>
