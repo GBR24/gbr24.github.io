@@ -6,14 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Calibria - Quantitative Finance Insights</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
     <style>
-        /* General Styling */
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
             background-color: #f0f0f0; /* Light grey */
             color: #333;
+            overflow-x: hidden;
         }
 
         header {
@@ -44,27 +43,19 @@
             font-size: 16px;
         }
 
+        #interactive-graphs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Keep background behind other elements */
+        }
+
         .content-section {
             padding: 60px 20px;
             max-width: 1200px;
             margin: 0 auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 15px 30px;
-            background: #00b894;
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        iframe {
-            border-radius: 4px;
-            border: 2px solid #e5e7eb;
         }
 
         footer {
@@ -83,24 +74,12 @@
         footer a:hover {
             text-decoration: underline;
         }
-
-        #interactive-graphs {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Behind content */
-            pointer-events: none; /* Prevent interactions with the background */
-        }
     </style>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-    <!-- Interactive Background -->
     <div id="interactive-graphs"></div>
 
-    <!-- Header -->
     <header>
         <div class="container">
             <a href="index.html">
@@ -117,39 +96,16 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="content-section" style="text-align: center;">
+    <section id="home" class="content-section">
         <h1>Welcome to Calibria</h1>
         <p>Your gateway to cutting-edge financial insights and models.</p>
-        <a href="#subscribe" class="cta-button">Sign Up for Insights</a>
     </section>
 
-    <!-- Services Section -->
     <section id="services" class="content-section">
         <h2>Our Services</h2>
         <p>Explore our innovative tools and insights into financial modeling, algorithmic trading, and risk management.</p>
-        <ul>
-            <li><strong>Quantitative Insights:</strong> Deep dives into stochastic processes and financial models.</li>
-            <li><strong>Neural Networks:</strong> Advanced analytics for financial predictions and market trends.</li>
-        </ul>
     </section>
 
-    <!-- Newsletter Section -->
-    <section id="subscribe" class="content-section" style="text-align: center;">
-        <h2>Subscribe to Our Weekly Forecasts</h2>
-        <iframe src="https://embeds.beehiiv.com/e6790eb9-776e-4506-b903-5b876dea24a7"
-                width="100%" height="230" frameborder="0" scrolling="no"
-                style="margin-top: 20px;"></iframe>
-    </section>
-
-    <!-- Telegram Section -->
-    <section id="telegram" class="content-section" style="text-align: center;">
-        <h2>Join Our Telegram Channel</h2>
-        <p>Get real-time updates and insights from our experts.</p>
-        <a href="https://t.me/+Ln6oi0hdN0MyYTQo" target="_blank" class="cta-button">Join Now</a>
-    </section>
-
-    <!-- Footer -->
     <footer>
         <p>© 2024 Calibria</p>
         <p>Follow us on 
@@ -159,42 +115,64 @@
         </p>
     </footer>
 
-    <!-- D3.js Interactive Graphs Script -->
+    <!-- D3.js Graph Animation Script -->
     <script>
+        // Set up SVG canvas
         const width = window.innerWidth;
         const height = window.innerHeight;
         const svg = d3.select("#interactive-graphs").append("svg")
             .attr("width", width)
             .attr("height", height);
 
+        // Create nodes for the graph
         const nodes = Array.from({ length: 50 }, () => ({
             x: Math.random() * width,
             y: Math.random() * height
         }));
 
-        svg.selectAll("circle")
+        // Add circles to represent nodes
+        const circles = svg.selectAll("circle")
             .data(nodes)
             .enter()
             .append("circle")
-            .attr("r", 3)
+            .attr("r", 4)
             .attr("fill", "#1a1a2e");
 
+        // Add mousemove interaction
         svg.on("mousemove", function (event) {
             const [mouseX, mouseY] = d3.pointer(event);
             nodes.forEach(node => {
                 const angle = Math.atan2(node.y - mouseY, node.x - mouseX);
                 node.x += Math.cos(angle) * 2;
                 node.y += Math.sin(angle) * 2;
+
+                // Ensure nodes stay within canvas bounds
+                node.x = Math.max(0, Math.min(width, node.x));
+                node.y = Math.max(0, Math.min(height, node.y));
             });
 
-            svg.selectAll("circle")
-                .data(nodes)
+            // Update circles
+            circles
                 .attr("cx", d => d.x)
                 .attr("cy", d => d.y);
         });
 
+        // Adjust canvas size on window resize
         window.addEventListener("resize", () => {
-            svg.attr("width", window.innerWidth).attr("height", window.innerHeight);
+            const newWidth = window.innerWidth;
+            const newHeight = window.innerHeight;
+
+            svg.attr("width", newWidth).attr("height", newHeight);
+
+            // Recalculate positions of nodes
+            nodes.forEach(node => {
+                node.x = Math.random() * newWidth;
+                node.y = Math.random() * newHeight;
+            });
+
+            circles
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y);
         });
     </script>
 </body>
