@@ -7,13 +7,14 @@
     <title>Calibria - Quantitative Finance Insights</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script> <!-- p5.js for moving graphs -->
     <style>
+        /* General Styling */
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            background-color: #f0f0f0; /* Beige or light grey */
+            background-color: #f0f0f0; /* Light grey */
             color: #333;
+            overflow: hidden; /* Prevent scrollbars during animations */
         }
 
         header {
@@ -42,16 +43,6 @@
             color: white;
             text-decoration: none;
             font-size: 16px;
-        }
-
-        #interactive-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: #f0f0f0; /* Matches body background */
         }
 
         .content-section {
@@ -93,11 +84,21 @@
         footer a:hover {
             text-decoration: underline;
         }
+
+        #interactive-graphs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind content */
+        }
     </style>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
     <!-- Interactive Background -->
-    <div id="interactive-background"></div>
+    <div id="interactive-graphs"></div>
 
     <!-- Header -->
     <header>
@@ -158,45 +159,52 @@
         </p>
     </footer>
 
-    <!-- Moving Graphs Script -->
+    <!-- D3.js Interactive Graphs Script -->
     <script>
-        let points = [];
-        const numPoints = 20;
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const svg = d3.select("#interactive-graphs").append("svg")
+            .attr("width", width)
+            .attr("height", height);
 
-        function setup() {
-            let canvas = createCanvas(windowWidth, windowHeight);
-            canvas.parent("interactive-background");
-            for (let i = 0; i < numPoints; i++) {
-                points.push(createVector(random(width), random(height)));
-            }
-        }
+        const nodes = Array.from({ length: 50 }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height
+        }));
 
-        function draw() {
-            clear();
-            background('#f0f0f0');
-            noFill();
-            strokeWeight(1);
-            stroke(20, 50, 80, 100); // Navy tone
+        svg.selectAll("circle")
+            .data(nodes)
+            .enter()
+            .append("circle")
+            .attr("r", 3)
+            .attr("fill", "#1a1a2e");
 
-            points.forEach((point) => {
-                point.x += random(-2, 2);
-                point.y += random(-2, 2);
-                ellipse(point.x, point.y, 20, 20);
+        const lines = svg.selectAll("line")
+            .data(d3.cross(nodes, nodes).filter(([a, b]) => a !== b))
+            .enter()
+            .append("line")
+            .attr("stroke", "#00b894")
+            .attr("stroke-width", 0.5);
+
+        svg.on("mousemove", function (event) {
+            const [mouseX, mouseY] = d3.pointer(event);
+            nodes.forEach(node => {
+                const angle = Math.atan2(node.y - mouseY, node.x - mouseX);
+                node.x += Math.cos(angle) * 2;
+                node.y += Math.sin(angle) * 2;
             });
 
-            for (let i = 0; i < points.length; i++) {
-                for (let j = i + 1; j < points.length; j++) {
-                    const distance = dist(points[i].x, points[i].y, points[j].x, points[j].y);
-                    if (distance < 150) {
-                        line(points[i].x, points[i].y, points[j].x, points[j].y);
-                    }
-                }
-            }
-        }
+            svg.selectAll("circle")
+                .data(nodes)
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y);
 
-        function windowResized() {
-            resizeCanvas(windowWidth, windowHeight);
-        }
+            lines
+                .attr("x1", ([a]) => a.x)
+                .attr("y1", ([a]) => a.y)
+                .attr("x2", ([, b]) => b.x)
+                .attr("y2", ([, b]) => b.y);
+        });
     </script>
 </body>
 </html>
