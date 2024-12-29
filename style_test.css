@@ -242,9 +242,4 @@ footer p {
     background-color: #005f99;
 }
 
-/*view container*/
-.container {
-    max-width: 1200px; /* Adjust this value for your desired content width */
-    margin: 0 auto;    /* Centers the content horizontally */
-    padding: 0 20px;   /* Adds some padding for smaller screens */
-} 
+
