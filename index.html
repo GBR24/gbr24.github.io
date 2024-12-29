@@ -4,176 +4,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Calibria - Quantitative Finance Insights</title>
+    <title>Quantitative Finance</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- Particles.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script> <!-- D3.js for graphs -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("contactLink").addEventListener("click", function () {
+            window.location.href = "contact.html";
+        });
+
+        // Our Services Link Navigation
+        document.getElementById("servicesLink").addEventListener("click", function (event) {
+            event.preventDefault();
+            window.location.href = "services.html";
+        });
+    });
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            background-color: #f0f0f0; /* Light grey */
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        header {
-            position: sticky;
-            top: 0;
-            background: rgba(26, 26, 46, 0.95); /* Semi-transparent navy */
-            z-index: 1000;
-            padding: 10px 20px;
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        #interactive-graphs {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Keep background behind other elements */
-        }
-
-        .content-section {
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #1a1a2e;
-            color: white;
-            font-size: 14px;
-        }
-
-        footer a {
-            color: #00b894;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-    <div id="interactive-graphs"></div>
-
     <header>
         <div class="container">
-            <a href="index.html">
-                <img src="Calibria (4).png" alt="Calibria Logo" style="height: 50px;">
-            </a>
+            <!-- Logo and Title -->
+            <div style="display: flex; align-items: center;">
+                <a href="index.html">
+                    <img src="Calibria (4).png" alt="Site Logo" style="height: 50px; margin-right: 10px;">
+                </a>
+                <!--<h1 style="margin: 0; font-size: 24px;">Quantitative Finance Insights</h1>-->
+            </div>
+
+            <!-- Navigation -->
             <nav>
-                <ul>
+                <ul style="list-style: none; display: flex; gap: 15px; margin: 0; padding: 0;">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#subscribe">Newsletter</a></li>
-                    <li><a href="#telegram">Telegram</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#" id="contactLink">Contact</a></li>
+                    <li><a href="#" id="servicesLink">Our Services</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section id="home" class="content-section">
-        <h1>Welcome to Calibria</h1>
-        <p>Your gateway to cutting-edge financial insights and models.</p>
-    </section>
+    <div class="container">
+        <!-- Hero Section with Particle Background -->
+        <section id="hero" style="position: relative; overflow: hidden;">
+            <div id="particles-js"></div>
+            <h2>Your Gateway to Financial Models</h2>
+            <p>Explore in-depth articles on financial modeling, algorithmic trading, and quantitative risk management.</p>
+            <div id="graph"></div>
+        </section>
 
-    <section id="services" class="content-section">
-        <h2>Our Services</h2>
-        <p>Explore our innovative tools and insights into financial modeling, algorithmic trading, and risk management.</p>
-    </section>
+        <section id="articles">
+            <h3>Services</h3>
+            <article>
+                <h4>A One Stop Shop for all quantitative investment insights</h4>
+                <p>An in-depth look at the stochastic processes used in financial modeling.</p>
+                <a href="#">Read More</a>
+            </article>
+            <article>
+                <h4>Neural Networks to support your analysis</h4>
+                <p>Explore various methods to calculate VaR, including historical simulation and Monte Carlo.</p>
+                <a href="#" id="readMoreBtn">Read More</a>
+            </article>
+        </section>
+
+        <!-- Newsletter Subscription Section -->
+        <section id="subscribe">
+            <h3>Subscribe to Our Weekly Forecasts</h3>
+            <iframe src="https://embeds.beehiiv.com/e6790eb9-776e-4506-b903-5b876dea24a7" 
+                    data-test-id="beehiiv-embed" 
+                    width="100%" 
+                    height="230" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    style="border-radius: 4px; border: 2px solid #e5e7eb; margin: 0; background-color: transparent;">
+            </iframe>
+        </section>
+
+        <!-- Telegram Section -->
+        <section id="telegram">
+            <h3>Join our channel</h3>
+            <p>Get Real-time updates and insights</p>
+            <a href="https://t.me/+Ln6oi0hdN0MyYTQo" target="_blank" id="telegramButton">
+                <button style="padding: 10px 20px; font-size: 16px; background-color: #0088cc; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    Telegram Channel
+                </button>
+            </a>
+        </section>
+    </div>
 
     <footer>
-        <p>© 2024 Calibria</p>
-        <p>Follow us on 
-            <a href="https://x.com/CalibriaQuant" target="_blank">Twitter</a>, 
-            <a href="#" target="_blank">LinkedIn</a>, and 
-            <a href="#" target="_blank">GitHub</a>.
-        </p>
+        <div class="container">
+            <p>© 2024 Calibria</p>
+        </div>
     </footer>
 
-    <!-- D3.js Graph Animation Script -->
+    <!-- Particles.js Configuration -->
     <script>
-        // Set up SVG canvas
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        const svg = d3.select("#interactive-graphs").append("svg")
-            .attr("width", width)
-            .attr("height", height);
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#ffffff" },
+            "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" } },
+            "opacity": { "value": 0.5 },
+            "size": { "value": 3, "random": true },
+            "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
+            "move": { "enable": true, "speed": 3 }
+        },
+        "interactivity": {
+            "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } },
+            "modes": { "grab": { "distance": 200, "line_linked": { "opacity": 1 } } }
+        },
+        "retina_detect": true
+    });
+    </script>
 
-        // Create nodes for the graph
-        const nodes = Array.from({ length: 50 }, () => ({
-            x: Math.random() * width,
-            y: Math.random() * height
-        }));
+    <!-- D3.js Line Graph Animation -->
+    <script>
+    const svg = d3.select("#graph")
+        .append("svg")
+        .attr("width", "100%")
+        .attr("height", 200);
 
-        // Add circles to represent nodes
-        const circles = svg.selectAll("circle")
-            .data(nodes)
-            .enter()
-            .append("circle")
-            .attr("r", 4)
-            .attr("fill", "#1a1a2e");
+    const data = Array.from({ length: 50 }, () => Math.random() * 100);
 
-        // Add mousemove interaction
-        svg.on("mousemove", function (event) {
-            const [mouseX, mouseY] = d3.pointer(event);
-            nodes.forEach(node => {
-                const angle = Math.atan2(node.y - mouseY, node.x - mouseX);
-                node.x += Math.cos(angle) * 2;
-                node.y += Math.sin(angle) * 2;
+    const x = d3.scaleLinear().domain([0, data.length - 1]).range([0, window.innerWidth]);
+    const y = d3.scaleLinear().domain([0, 100]).range([200, 0]);
 
-                // Ensure nodes stay within canvas bounds
-                node.x = Math.max(0, Math.min(width, node.x));
-                node.y = Math.max(0, Math.min(height, node.y));
-            });
+    const line = d3.line()
+        .x((_, i) => x(i))
+        .y(d => y(d))
+        .curve(d3.curveBasis);
 
-            // Update circles
-            circles
-                .attr("cx", d => d.x)
-                .attr("cy", d => d.y);
-        });
+    const path = svg.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 2)
+        .attr("d", line);
 
-        // Adjust canvas size on window resize
-        window.addEventListener("resize", () => {
-            const newWidth = window.innerWidth;
-            const newHeight = window.innerHeight;
+    function animateLine() {
+        data.push(Math.random() * 100);
+        data.shift();
 
-            svg.attr("width", newWidth).attr("height", newHeight);
+        path.datum(data).attr("d", line);
 
-            // Recalculate positions of nodes
-            nodes.forEach(node => {
-                node.x = Math.random() * newWidth;
-                node.y = Math.random() * newHeight;
-            });
+        requestAnimationFrame(animateLine);
+    }
 
-            circles
-                .attr("cx", d => d.x)
-                .attr("cy", d => d.y);
-        });
+    animateLine();
     </script>
 </body>
 </html>
